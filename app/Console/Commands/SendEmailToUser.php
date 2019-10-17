@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\SendUserNotification;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use App\User;
@@ -43,12 +44,9 @@ class SendEmailToUser extends Command
         $users = User::limit(5)->get();
 
         foreach ($users as $user) {
-            $mail_body = "HI {$user->name}, Get ready for work." . PHP_EOL;
-            Mail::raw($mail_body, function ($mail) use ($user) {
-                $mail->from('yourmail@yourmail.com');
-                $mail->to($user->email)
-                    ->subject('Work Alert');
-            });
+            retry(5, function () use ($user) {
+                Mail::to($user)->send(new SendUserNotification($user));
+            }, 100);
         }
 
         $this->info('Notification Email Sent to All Users');
