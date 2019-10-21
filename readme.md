@@ -25,4 +25,4 @@ In App\Console\Commands\SendEmailToUser.php you will get your command for perfor
 send:email is your command. You can change it according to your need. 
 
 ## Demonstration
-For details description go to [this](https://monirahmedtanveen.github.io/monir.log/sheduling-task-with-cron-job-in-laravel) link.
+For details description go to [this](https://monirahmedtanveen.github.io/tech.logs/2019/09/28/scheduling-task-with-cron-job-in-laravel.html) link.
